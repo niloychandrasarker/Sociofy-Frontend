@@ -18,10 +18,10 @@ function MidlePart() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto py-4 space-y-6 pb-20 lg:pb-6">
+    <div className="w-full mx-auto py-4 space-y-6 pb-20 lg:pb-6">
       {/* Story Section */}
       <Card className="p-4 sm:p-6 rounded-2xl shadow-card border-0 bg-white/95 backdrop-blur-lg hover-lift">
-        <div className="flex items-center space-x-4 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center space-x-4 overflow-x-auto scrollbar-hide pb-2">
           {/* Add Story Button */}
           <div className="flex flex-col items-center min-w-0 flex-shrink-0 cursor-pointer group">
             <div className="relative">
@@ -51,7 +51,7 @@ function MidlePart() {
         <div className="flex items-center space-x-4 mb-6">
           <Avatar 
             sx={{ width: { xs: 40, sm: 48 }, height: { xs: 40, sm: 48 } }}
-            className="ring-2 ring-gray-100"
+            className="ring-2 ring-gray-100 flex-shrink-0"
           />
           <input
             readOnly

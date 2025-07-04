@@ -7,7 +7,7 @@ const popularUser = [1, 1, 1, 1, 1];
 
 const HomeRight = () => {
   return (
-    <div className="p-4 lg:p-6 space-y-6">
+    <div className="w-full h-full p-4 lg:p-6 space-y-6 overflow-y-auto">
       {/* Search Section */}
       <SearchUsers />
       

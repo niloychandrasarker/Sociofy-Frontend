@@ -13,89 +13,116 @@ const HomePage = () => {
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-      <Grid container spacing={0} className="min-h-screen">
-        {/* Left Sidebar - Hidden on mobile, visible on desktop */}
-        <Grid 
-          item 
-          xs={0} 
-          sm={0} 
-          md={0}
-          lg={3}
-          className="hidden lg:block"
-        >
-          <div className="sticky top-0 h-screen">
-            <Sidebar />
+      {/* Mobile Top Navigation - Fixed */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-200 z-50 shadow-sm">
+        <div className="flex items-center justify-between px-4 py-3">
+          <h1 className="font-display text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            Sociofy
+          </h1>
+          <div className="flex items-center space-x-3">
+            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5-5-5h5v-12h5v12z" />
+              </svg>
+            </button>
           </div>
-        </Grid>
+        </div>
+      </div>
 
-        {/* Main Content */}
-        <Grid
-          item
-          xs={12}
-          sm={location.pathname === "/" ? 7 : 12}
-          md={location.pathname === "/" ? 8 : 12}
-          lg={location.pathname === "/" ? 6 : 9}
-          className="flex justify-center px-2 sm:px-4 lg:px-6"
-        >
-          <div className="w-full max-w-2xl">
-            <Routes>
-              <Route path="/" element={<MidlePart />} />
-              <Route path="reels" element={<Reels />} />
-              <Route path="create-reels" element={<CreateReels />} />
-              <Route path="profile/:id" element={<Profile />} />
-            </Routes>
-          </div>
-        </Grid>
-
-        {/* Right Sidebar - Show on tablet and desktop for home page */}
-        {location.pathname === "/" && (
+      {/* Main Content Container - Full Width */}
+      <div className="w-full max-w-none">
+        <Grid container spacing={0} className="min-h-screen">
+          {/* Left Sidebar - Full height, hidden on mobile */}
           <Grid 
             item 
-            xs={0}
-            sm={5}
-            md={4}
+            xs={0} 
+            sm={0} 
+            md={0}
             lg={3}
-            className="hidden sm:block"
+            xl={2.5}
+            className="hidden lg:block"
           >
-            <div className="sticky top-0 h-screen overflow-y-auto custom-scrollbar">
-              <HomeRight />
+            <div className="sticky top-0 h-screen w-full">
+              <Sidebar />
             </div>
           </Grid>
-        )}
-      </Grid>
 
-      {/* Mobile Bottom Navigation */}
+          {/* Main Content - Responsive width */}
+          <Grid
+            item
+            xs={12}
+            sm={location.pathname === "/" ? 8 : 12}
+            md={location.pathname === "/" ? 8 : 12}
+            lg={location.pathname === "/" ? 6 : 9}
+            xl={location.pathname === "/" ? 7 : 9.5}
+            className="flex justify-center"
+          >
+            <div className="w-full max-w-none px-2 sm:px-4 lg:px-6 pt-16 lg:pt-0">
+              <Routes>
+                <Route path="/" element={<MidlePart />} />
+                <Route path="reels" element={<Reels />} />
+                <Route path="create-reels" element={<CreateReels />} />
+                <Route path="profile/:id" element={<Profile />} />
+              </Routes>
+            </div>
+          </Grid>
+
+          {/* Right Sidebar - Show on tablet and desktop for home page */}
+          {location.pathname === "/" && (
+            <Grid 
+              item 
+              xs={0}
+              sm={4}
+              md={4}
+              lg={3}
+              xl={2.5}
+              className="hidden sm:block"
+            >
+              <div className="sticky top-0 h-screen overflow-y-auto custom-scrollbar w-full">
+                <HomeRight />
+              </div>
+            </Grid>
+          )}
+        </Grid>
+      </div>
+
+      {/* Mobile Bottom Navigation - Fixed */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 z-50 shadow-lg">
-        <div className="flex justify-around items-center py-2 px-4">
-          <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors">
+        <div className="flex justify-around items-center py-2 px-2 safe-area-inset-bottom">
+          <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors min-w-0 flex-1">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
-            <span className="text-xs mt-1">Home</span>
+            <span className="text-xs mt-1 truncate">Home</span>
           </button>
-          <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors">
+          <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors min-w-0 flex-1">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
-            <span className="text-xs mt-1">Explore</span>
+            <span className="text-xs mt-1 truncate">Explore</span>
           </button>
-          <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors">
+          <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors min-w-0 flex-1">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
-            <span className="text-xs mt-1">Create</span>
+            <span className="text-xs mt-1 truncate">Create</span>
           </button>
-          <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors">
+          <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors min-w-0 flex-1">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
-            <span className="text-xs mt-1">Messages</span>
+            <span className="text-xs mt-1 truncate">Messages</span>
           </button>
-          <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors">
+          <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors min-w-0 flex-1">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
-            <span className="text-xs mt-1">Profile</span>
+            <span className="text-xs mt-1 truncate">Profile</span>
           </button>
         </div>
       </div>

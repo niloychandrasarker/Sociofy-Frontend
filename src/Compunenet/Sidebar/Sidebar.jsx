@@ -29,17 +29,18 @@ const Sidebar = () => {
     <Card
       className="h-screen flex flex-col justify-between py-6 shadow-elegant border-0 bg-white/95 backdrop-blur-lg"
       sx={{ 
-        minWidth: { md: 280, lg: 320 }, 
-        maxWidth: { md: 320, lg: 380 },
+        width: '100%',
+        minWidth: '100%',
+        maxWidth: '100%',
         borderRadius: 0,
         background: 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(20px)'
       }}
     >
-      <div className="space-y-8 px-6">
+      <div className="space-y-8 px-4 xl:px-6 flex-1 overflow-y-auto">
         {/* Logo */}
         <div className="pt-2">
-          <h1 className="font-display text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <h1 className="font-display text-2xl xl:text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
             Sociofy
           </h1>
         </div>
@@ -50,12 +51,12 @@ const Sidebar = () => {
             <button
               key={item.title}
               onClick={() => handleNavigation(item.path)}
-              className="w-full flex items-center space-x-4 p-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 text-left group hover-lift"
+              className="w-full flex items-center space-x-3 xl:space-x-4 p-3 xl:p-4 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 text-left group hover-lift"
             >
-              <div className="text-gray-600 group-hover:text-blue-600 transition-colors">
+              <div className="text-gray-600 group-hover:text-blue-600 transition-colors flex-shrink-0">
                 {item.icon}
               </div>
-              <span className="text-lg font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
+              <span className="text-base xl:text-lg font-medium text-gray-700 group-hover:text-blue-600 transition-colors truncate">
                 {item.title}
               </span>
             </button>
@@ -64,14 +65,14 @@ const Sidebar = () => {
       </div>
 
       {/* User Profile Section */}
-      <div className="px-6">
+      <div className="px-4 xl:px-6 flex-shrink-0">
         <Divider className="my-6 opacity-60" />
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 flex-1 min-w-0">
             <Avatar 
               src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
               sx={{ width: 48, height: 48 }}
-              className="ring-2 ring-blue-100"
+              className="ring-2 ring-blue-100 flex-shrink-0"
             />
             <div className="flex-1 min-w-0">
               <p className="text-lg font-semibold text-gray-900 truncate">
@@ -85,7 +86,7 @@ const Sidebar = () => {
           
           <button
             onClick={handleClick}
-            className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="p-2 rounded-lg hover:bg-gray-100 transition-colors flex-shrink-0"
             aria-label="More options"
           >
             <MoreVertIcon className="text-gray-600" />
