@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import MidlePart from "../../Compunenet/MidlePart/MidlePart";
 import Reels from "../../Compunenet/Reels/Reels";
@@ -7,25 +7,20 @@ import CreateReels from "../../Compunenet/Reels/CreateReels";
 import Profile from "../Profile/Profile";
 import HomeRight from "../../Compunenet/HomeRight/HomeRight";
 import Sidebar from "../../Compunenet/Sidebar/Sidebar";
-import MobileSearch from "../../Compunenet/MobileSearch/MobileSearch";
 
 const HomePage = () => {
   const location = useLocation();
-  const [showMobileSearch, setShowMobileSearch] = useState(false);
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Mobile Top Navigation - Fixed */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-200 z-40 shadow-sm">
+      <div className="lg:hidden fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-200 z-50 shadow-sm">
         <div className="flex items-center justify-between px-4 py-3">
           <h1 className="font-display text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
             Sociofy
           </h1>
           <div className="flex items-center space-x-3">
-            <button 
-              onClick={() => setShowMobileSearch(true)}
-              className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            >
+            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
               <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
@@ -39,26 +34,22 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Mobile Search Modal */}
-      <MobileSearch 
-        isOpen={showMobileSearch} 
-        onClose={() => setShowMobileSearch(false)} 
-      />
-
-      {/* Desktop Layout - Full Width Container */}
+      {/* Main Content Container - Full Width Desktop */}
       <div className="w-full min-h-screen">
-        <div className="max-w-[1920px] mx-auto flex">
+        <div className="flex w-full">
           {/* Left Sidebar - Fixed width on desktop */}
-          <div className="hidden lg:block lg:w-80 xl:w-96 flex-shrink-0 sticky top-0 h-screen">
-            <Sidebar />
+          <div className="hidden lg:block lg:w-80 xl:w-96 flex-shrink-0">
+            <div className="sticky top-0 h-screen">
+              <Sidebar />
+            </div>
           </div>
 
-          {/* Main Content Area - Flexible width with proper constraints */}
-          <div className="flex-1 min-w-0 max-w-full">
-            <div className="flex w-full h-full">
-              {/* Middle Content - Centered with max width */}
-              <div className="flex-1 min-w-0 flex justify-center">
-                <div className="w-full max-w-2xl px-4 sm:px-6 lg:px-8 pt-16 lg:pt-0">
+          {/* Main Content Area - Flexible width */}
+          <div className="flex-1 min-w-0">
+            <div className="flex w-full">
+              {/* Middle Content */}
+              <div className={`flex-1 min-w-0 ${location.pathname === "/" ? "lg:pr-4" : ""}`}>
+                <div className="w-full px-4 sm:px-6 lg:px-8 pt-16 lg:pt-0">
                   <Routes>
                     <Route path="/" element={<MidlePart />} />
                     <Route path="reels" element={<Reels />} />
@@ -68,10 +59,12 @@ const HomePage = () => {
                 </div>
               </div>
 
-              {/* Right Sidebar - Show on desktop for home page */}
+              {/* Right Sidebar - Show on tablet and desktop for home page */}
               {location.pathname === "/" && (
-                <div className="hidden lg:block lg:w-80 xl:w-96 flex-shrink-0 sticky top-0 h-screen overflow-y-auto custom-scrollbar">
-                  <HomeRight />
+                <div className="hidden sm:block sm:w-80 lg:w-96 xl:w-80 flex-shrink-0">
+                  <div className="sticky top-0 h-screen overflow-y-auto custom-scrollbar">
+                    <HomeRight />
+                  </div>
                 </div>
               )}
             </div>
@@ -80,7 +73,7 @@ const HomePage = () => {
       </div>
 
       {/* Mobile Bottom Navigation - Fixed */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 z-40 shadow-lg">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 z-50 shadow-lg">
         <div className="flex justify-around items-center py-2 px-2 safe-area-inset-bottom">
           <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors min-w-0 flex-1">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
