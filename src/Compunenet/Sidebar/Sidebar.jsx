@@ -2,77 +2,129 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import { navigationMenu } from "./sidebarmenu.jsx";
 import Divider from "@mui/material/Divider";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Card from "@mui/material/Card";
-
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <Card
-      className="card h-screen flex flex-col justify-between py-5"
-      sx={{ minWidth: 350, maxWidth: 450 }} // ekhane width barano holo
+      className="h-screen flex flex-col justify-between py-6 shadow-elegant border-0 bg-white/95 backdrop-blur-lg"
+      sx={{ 
+        minWidth: { md: 280, lg: 320 }, 
+        maxWidth: { md: 320, lg: 380 },
+        borderRadius: 0,
+        background: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(20px)'
+      }}
     >
-      <div className="space-y-8 pl-5 w-96"> {/* w-80 = 20rem, aro barate chaile w-96/w-[28rem] use korte paren */}
-        <div>
-          <span className="logo font-bold text-xl">Sociofy</span>
+      <div className="space-y-8 px-6">
+        {/* Logo */}
+        <div className="pt-2">
+          <h1 className="font-display text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            Sociofy
+          </h1>
         </div>
-        <div className="space-y-8">
+
+        {/* Navigation Menu */}
+        <nav className="space-y-2">
           {navigationMenu.map((item) => (
-            <div
-              className="flex space-x-3 items-center cursor-pointer hover:bg-gray-100 p-2 rounded-lg"
+            <button
               key={item.title}
+              onClick={() => handleNavigation(item.path)}
+              className="w-full flex items-center space-x-4 p-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 text-left group hover-lift"
             >
-              {item.icon}
-              <p className="text-xl">{item.title}</p>
-            </div>
+              <div className="text-gray-600 group-hover:text-blue-600 transition-colors">
+                {item.icon}
+              </div>
+              <span className="text-lg font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
+                {item.title}
+              </span>
+            </button>
           ))}
-        </div>
+        </nav>
       </div>
-      <div>
-        <Divider className="my-4" />
-        <div className="pl-5 flex items-center justify-between pt-5">
+
+      {/* User Profile Section */}
+      <div className="px-6">
+        <Divider className="my-6 opacity-60" />
+        <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <Avatar src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png" />
-            <div>
-              <p className="text-lg font-semibold">Code With Niloy</p>
-              <p className="text-sm text-gray-500">@codewithniloy</p>
+            <Avatar 
+              src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+              sx={{ width: 48, height: 48 }}
+              className="ring-2 ring-blue-100"
+            />
+            <div className="flex-1 min-w-0">
+              <p className="text-lg font-semibold text-gray-900 truncate">
+                Code With Niloy
+              </p>
+              <p className="text-sm text-gray-500 truncate">
+                @codewithniloy
+              </p>
             </div>
           </div>
-          <div>
-           <MoreVertIcon
-              id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            />
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              slotProps={{
-                list: {
-                  "aria-labelledby": "basic-button",
-                },
-              }}
+          
+          <button
+            onClick={handleClick}
+            className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            aria-label="More options"
+          >
+            <MoreVertIcon className="text-gray-600" />
+          </button>
+          
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            PaperProps={{
+              sx: {
+                borderRadius: 2,
+                mt: 1,
+                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                border: '1px solid rgba(0, 0, 0, 0.05)'
+              }
+            }}
+          >
+            <MenuItem 
+              onClick={handleClose}
+              className="hover:bg-blue-50 transition-colors"
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
-            </Menu>
-          </div>
+              Profile
+            </MenuItem>
+            <MenuItem 
+              onClick={handleClose}
+              className="hover:bg-blue-50 transition-colors"
+            >
+              Settings
+            </MenuItem>
+            <MenuItem 
+              onClick={handleClose}
+              className="hover:bg-red-50 text-red-600 transition-colors"
+            >
+              Logout
+            </MenuItem>
+          </Menu>
         </div>
       </div>
     </Card>
