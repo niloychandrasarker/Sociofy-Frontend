@@ -32,7 +32,7 @@ const HomePage = () => {
         <Grid
           item
           xs={12}
-          sm={12}
+          sm={location.pathname === "/" ? 8 : 12}
           md={location.pathname === "/" ? 6 : 9}
           lg={location.pathname === "/" ? 6 : 9}
           className="flex justify-center px-2 sm:px-4 lg:px-6"
@@ -47,17 +47,28 @@ const HomePage = () => {
           </div>
         </Grid>
 
-        {/* Right Sidebar - Hidden on mobile/tablet, visible on desktop */}
+        {/* Right Sidebar - Responsive display */}
         {location.pathname === "/" && (
           <Grid 
             item 
-            lg={3} 
-            className="hidden lg:block"
+            xs={0}
+            sm={4}
+            md={0}
+            lg={3}
+            className="hidden sm:block md:hidden lg:block"
           >
             <div className="sticky top-0 h-screen overflow-y-auto">
               <HomeRight />
             </div>
           </Grid>
+        )}
+
+        {/* Mobile HomeRight - Show as bottom sheet or modal on mobile */}
+        {location.pathname === "/" && (
+          <div className="sm:hidden">
+            {/* This could be implemented as a slide-up panel or modal for mobile */}
+            {/* For now, we'll add it to the main content area on mobile */}
+          </div>
         )}
       </Grid>
 

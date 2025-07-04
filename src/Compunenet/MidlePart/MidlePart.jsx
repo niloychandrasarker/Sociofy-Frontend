@@ -7,6 +7,7 @@ import ImageIcon from "@mui/icons-material/Image";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import ArticleIcon from "@mui/icons-material/Article";
 import PostCard from "../Post/PostCard";
+import HomeRight from "../HomeRight/HomeRight";
 
 const story = [1, 1, 1, 1, 1, 1];
 const posts = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
@@ -94,6 +95,11 @@ function MidlePart() {
         {posts.map((item, index) => (
           <PostCard key={index} />
         ))}
+      </div>
+
+      {/* Mobile HomeRight Section - Only visible on mobile */}
+      <div className="block sm:hidden mt-8">
+        <HomeRight />
       </div>
     </div>
   );
