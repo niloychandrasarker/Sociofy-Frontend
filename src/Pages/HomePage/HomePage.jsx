@@ -34,61 +34,42 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Main Content Container - Full Width */}
-      <div className="w-full max-w-none">
-        <Grid container spacing={0} className="min-h-screen">
-          {/* Left Sidebar - Full height, hidden on mobile */}
-          <Grid 
-            item 
-            xs={0} 
-            sm={0} 
-            md={0}
-            lg={3}
-            xl={2.5}
-            className="hidden lg:block"
-          >
-            <div className="sticky top-0 h-screen w-full">
+      {/* Main Content Container - Full Width Desktop */}
+      <div className="w-full min-h-screen">
+        <div className="flex w-full">
+          {/* Left Sidebar - Fixed width on desktop */}
+          <div className="hidden lg:block lg:w-80 xl:w-96 flex-shrink-0">
+            <div className="sticky top-0 h-screen">
               <Sidebar />
             </div>
-          </Grid>
+          </div>
 
-          {/* Main Content - Responsive width */}
-          <Grid
-            item
-            xs={12}
-            sm={location.pathname === "/" ? 8 : 12}
-            md={location.pathname === "/" ? 8 : 12}
-            lg={location.pathname === "/" ? 6 : 9}
-            xl={location.pathname === "/" ? 7 : 9.5}
-            className="flex justify-center"
-          >
-            <div className="w-full max-w-none px-2 sm:px-4 lg:px-6 pt-16 lg:pt-0">
-              <Routes>
-                <Route path="/" element={<MidlePart />} />
-                <Route path="reels" element={<Reels />} />
-                <Route path="create-reels" element={<CreateReels />} />
-                <Route path="profile/:id" element={<Profile />} />
-              </Routes>
-            </div>
-          </Grid>
-
-          {/* Right Sidebar - Show on tablet and desktop for home page */}
-          {location.pathname === "/" && (
-            <Grid 
-              item 
-              xs={0}
-              sm={4}
-              md={4}
-              lg={3}
-              xl={2.5}
-              className="hidden sm:block"
-            >
-              <div className="sticky top-0 h-screen overflow-y-auto custom-scrollbar w-full">
-                <HomeRight />
+          {/* Main Content Area - Flexible width */}
+          <div className="flex-1 min-w-0">
+            <div className="flex w-full">
+              {/* Middle Content */}
+              <div className={`flex-1 min-w-0 ${location.pathname === "/" ? "lg:pr-4" : ""}`}>
+                <div className="w-full px-4 sm:px-6 lg:px-8 pt-16 lg:pt-0">
+                  <Routes>
+                    <Route path="/" element={<MidlePart />} />
+                    <Route path="reels" element={<Reels />} />
+                    <Route path="create-reels" element={<CreateReels />} />
+                    <Route path="profile/:id" element={<Profile />} />
+                  </Routes>
+                </div>
               </div>
-            </Grid>
-          )}
-        </Grid>
+
+              {/* Right Sidebar - Show on tablet and desktop for home page */}
+              {location.pathname === "/" && (
+                <div className="hidden sm:block sm:w-80 lg:w-96 xl:w-80 flex-shrink-0">
+                  <div className="sticky top-0 h-screen overflow-y-auto custom-scrollbar">
+                    <HomeRight />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Mobile Bottom Navigation - Fixed */}

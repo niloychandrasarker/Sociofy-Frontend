@@ -18,7 +18,7 @@ function MidlePart() {
   };
 
   return (
-    <div className="w-full mx-auto py-4 space-y-6 pb-20 lg:pb-6">
+    <div className="w-full max-w-2xl mx-auto py-4 space-y-6 pb-20 lg:pb-6">
       {/* Story Section */}
       <Card className="p-4 sm:p-6 rounded-2xl shadow-card border-0 bg-white/95 backdrop-blur-lg hover-lift">
         <div className="flex items-center space-x-4 overflow-x-auto scrollbar-hide pb-2">
