@@ -18,7 +18,7 @@ function MidlePart() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto py-4 space-y-6 pb-20 md:pb-6">
+    <div className="w-full max-w-2xl mx-auto py-4 space-y-6 pb-20 lg:pb-6">
       {/* Story Section */}
       <Card className="p-4 sm:p-6 rounded-2xl shadow-card border-0 bg-white/95 backdrop-blur-lg hover-lift">
         <div className="flex items-center space-x-4 overflow-x-auto scrollbar-hide">
@@ -99,7 +99,10 @@ function MidlePart() {
 
       {/* Mobile HomeRight Section - Only visible on mobile */}
       <div className="block sm:hidden mt-8">
-        <HomeRight />
+        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-card">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Discover</h3>
+          <HomeRight />
+        </div>
       </div>
     </div>
   );

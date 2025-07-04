@@ -14,14 +14,14 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       <Grid container spacing={0} className="min-h-screen">
-        {/* Sidebar - Hidden on mobile, visible on tablet+ */}
+        {/* Left Sidebar - Hidden on mobile, visible on desktop */}
         <Grid 
           item 
           xs={0} 
           sm={0} 
-          md={3} 
+          md={0}
           lg={3}
-          className="hidden md:block"
+          className="hidden lg:block"
         >
           <div className="sticky top-0 h-screen">
             <Sidebar />
@@ -32,8 +32,8 @@ const HomePage = () => {
         <Grid
           item
           xs={12}
-          sm={location.pathname === "/" ? 8 : 12}
-          md={location.pathname === "/" ? 6 : 9}
+          sm={location.pathname === "/" ? 7 : 12}
+          md={location.pathname === "/" ? 8 : 12}
           lg={location.pathname === "/" ? 6 : 9}
           className="flex justify-center px-2 sm:px-4 lg:px-6"
         >
@@ -47,33 +47,25 @@ const HomePage = () => {
           </div>
         </Grid>
 
-        {/* Right Sidebar - Responsive display */}
+        {/* Right Sidebar - Show on tablet and desktop for home page */}
         {location.pathname === "/" && (
           <Grid 
             item 
             xs={0}
-            sm={4}
-            md={0}
+            sm={5}
+            md={4}
             lg={3}
-            className="hidden sm:block md:hidden lg:block"
+            className="hidden sm:block"
           >
-            <div className="sticky top-0 h-screen overflow-y-auto">
+            <div className="sticky top-0 h-screen overflow-y-auto custom-scrollbar">
               <HomeRight />
             </div>
           </Grid>
         )}
-
-        {/* Mobile HomeRight - Show as bottom sheet or modal on mobile */}
-        {location.pathname === "/" && (
-          <div className="sm:hidden">
-            {/* This could be implemented as a slide-up panel or modal for mobile */}
-            {/* For now, we'll add it to the main content area on mobile */}
-          </div>
-        )}
       </Grid>
 
       {/* Mobile Bottom Navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 z-50">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 z-50 shadow-lg">
         <div className="flex justify-around items-center py-2 px-4">
           <button className="flex flex-col items-center p-2 text-gray-600 hover:text-blue-600 transition-colors">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
